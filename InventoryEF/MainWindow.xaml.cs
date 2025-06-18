@@ -42,7 +42,8 @@ namespace InventoryEF
         }
         private void DeleteBook(object sender, RoutedEventArgs e)
         {
-            vm.AddNewBook();
+            
+            vm.DeleteBook((Book)Inventory.SelectedItem);
         }
 
     }
@@ -88,7 +89,22 @@ namespace InventoryEF
             OnPropertyChanged(nameof(BooksInventory));
         }
 
+        public void DeleteBook(Book book)
+        {
 
+
+            using (var context = new LibraryContext())
+            {
+                if (BooksInventory.Contains(book))
+                {
+                    BooksInventory.Remove(book);
+                    context.Books.Remove(book);
+                }
+                context.SaveChanges();
+            }
+
+            OnPropertyChanged(nameof(BooksInventory));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

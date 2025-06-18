@@ -44,7 +44,7 @@
         </StackPanel>
 
 
-        <ListView  ItemsSource="{Binding BooksInventory}" Background="#FFC3C3C3" Foreground="Black" Grid.Column="1" Grid.Row="1">
+        <ListView  ItemsSource="{Binding BooksInventory}" Background="#FFC3C3C3" Foreground="Black" Grid.Column="1" Grid.Row="1" Name="Inventory">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="40"/>
