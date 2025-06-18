@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryEF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="InventoryEF" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="274*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="2" Content="ADD BOOK" Margin="10" Click="AddNewBook"/>
+        
+        <TextBox Grid.Row="2" Grid.Column="1" Width="150" Margin="5" HorizontalAlignment="Left"/>
+        
+        <TextBox Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
+        
+        <TextBox Grid.Row="2" Grid.Column="1" Width="110" Margin="5" HorizontalAlignment="Right"/>
+
+        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding BooksInventory}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="40"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="140"/>
+                    <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Author}" Width="140"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="70"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>
