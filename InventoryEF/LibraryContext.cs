@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 
 namespace InventoryEF
@@ -9,7 +10,9 @@ namespace InventoryEF
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=library.db");  // SQLite database
+            var dbPath = Path.Combine(AppContext.BaseDirectory, "library.db");
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
+            
         }
     }
 }

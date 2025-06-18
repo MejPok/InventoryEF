@@ -40,12 +40,29 @@ namespace InventoryEF
         {
             vm.AddNewBook();
         }
+        private void DeleteBook(object sender, RoutedEventArgs e)
+        {
+            vm.AddNewBook();
+        }
+
     }
 
 
     class MainWindowVM : INotifyPropertyChanged
     {
         public ObservableCollection<Book> BooksInventory { get; set; }
+
+        string title;
+        public string Title { get { return title; } set { title = value; OnPropertyChanged(nameof(Title)); } }
+
+        string author;
+
+        public string Author { get { return author; } set { author = value; OnPropertyChanged(nameof(Author)); } }
+
+        string _price;
+        public string Price { get { return _price; } set { _price = value; OnPropertyChanged(nameof(_price)); price = int.Parse(_price); } }
+
+        int price;
 
         public async Task LoadInventoryFromDbAsync()
         {
@@ -56,20 +73,17 @@ namespace InventoryEF
             OnPropertyChanged(nameof(BooksInventory));
         }
 
-        public async Task SaveInventoryFromDbAsync()
-        {
-            using (var context = new LibraryContext())
-            {
-                BooksInventory = new ObservableCollection<Book>(await context.Books.ToListAsync());
-            }
-            OnPropertyChanged(nameof(BooksInventory));
-        }
 
         public void AddNewBook()
         {
+
             using (var context = new LibraryContext())
             {
-               
+               var book = new Book() { Author = author, Price = price, Title = title };
+
+               context.Books.Add(book);
+               BooksInventory.Add(book);
+               context.SaveChanges();
             }
             OnPropertyChanged(nameof(BooksInventory));
         }
